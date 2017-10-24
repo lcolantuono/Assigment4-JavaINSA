@@ -18,11 +18,9 @@ public class UndirectedGraph {
 		public void addNeighbour(Node p, Node n){
 			if (graph.containsKey(p)){
 				ArrayList<Node> l = graph.get(p);
-				if (hasRelation(n, p)){
-					System.out.println("It is not possible add this Node in the Undirected Grph because has already a relation.");
-				}else{
-					l.add(n);
-				}
+				l.add(n);
+				ArrayList<Node> l2 = graph.get(n);
+				l2.add(p);
 			}else{
 				System.out.println("Parent Node is not added in the Graph.");
 			}
@@ -46,17 +44,24 @@ public class UndirectedGraph {
 		}
 		
 		public void deleteNeighbour(Node p, Node n){
-			ArrayList nList = graph.get(p);
+			ArrayList pList = graph.get(p);
+			ArrayList nList = graph.get(n);
 			if (nList==null){
 				System.out.println("Parent Node is not added in the Graph.");
 			}else{
-				for (int i = 0; i<nList.size(); i++){
+				for (int i = 0; i<pList.size(); i++){
 					Node nodeDelete = (Node) nList.get(i);
 					if (nodeDelete==n) {
 						nList.remove(nodeDelete);
 					}
 				}
-			}
+				for (int i = 0; i<nList.size(); i++){
+					Node nodeDelete = (Node) nList.get(i);
+					if (nodeDelete==p) {
+						nList.remove(nodeDelete);
+					}
+				}
+			}	
 		}
 		
 		private boolean hasRelation(Node p, Node n){

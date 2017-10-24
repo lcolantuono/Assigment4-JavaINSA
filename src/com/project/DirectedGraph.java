@@ -5,7 +5,6 @@ import java.util.*;
 public class DirectedGraph {
 	
 private Map<Node, ArrayList<Node>> graph = new HashMap<Node, ArrayList<Node>>();
-private ArrayList<Label> label = new ArrayList<Label>();
 	
 	public void addNode(Node n){
 		if (graph.containsKey(n)){
@@ -19,8 +18,6 @@ private ArrayList<Label> label = new ArrayList<Label>();
 		if (graph.containsKey(p)){
 			ArrayList<Node> l = graph.get(p);
 			l.add(n);
-			Label e = new Label(p.getName()+","+n.getName());
-			label.add(e);
 		}else{
 			System.out.println("Parent Node is not added in the Graph.");
 		}
@@ -52,8 +49,6 @@ private ArrayList<Label> label = new ArrayList<Label>();
 				Node nodeDelete = (Node) nList.get(i);
 				if (nodeDelete==n) {
 					nList.remove(nodeDelete);
-					Label e = new Label(p.getName()+","+n.getName());
-					label.remove(e);
 				}
 			}
 		}
